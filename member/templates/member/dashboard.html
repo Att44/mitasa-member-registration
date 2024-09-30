@@ -1,0 +1,291 @@
+{% extends "member/main.html" %} {% block content %} {% comment %}
+<h1>Dashboard</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Jumlah Pendaftar</th>
+      <th scope="col">Jumlah Ahli</th>
+      <th scope="col">Jumlah Pending</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{totalMember}}</td>
+      <td>{{totalAhli}}</td>
+      <td>{{totalPending}}</td>
+    </tr>
+  </tbody>
+</table>
+{% endcomment %}
+
+<style>
+  .chart-container {
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a
+      href="{% url 'import-fees' %}"
+      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+      ><i class="fas fa-download fa-sm text-white-50"></i> Import Member Fee</a
+    >
+  </div>
+
+  
+
+  {% include "member/memberdash.html" %}
+
+  <div class="row">
+    {% include "member/member_fee.html" %}
+  </div>
+
+  
+
+  <!-- Content Row -->
+
+  <div class="row">
+    <!-- Area Chart -->
+    <div class="col">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Yuran Bulanan</h6>
+
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area chart-container">
+            <canvas id="myBarChart"></canvas>
+        </div>
+        <div class="mt-4 text-center small">
+            <!-- Optionally, you can add labels or legends here -->
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie Chart -->
+
+  </div>
+
+  <div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-6 ">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Fakulti</h6>
+
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="fakultiChart"></canvas>
+        </div>
+        <div class="mt-4 text-center small">
+            <!-- Optionally, you can add labels or legends here -->
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-6">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Cawangan</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <div class="chart-area">
+                <canvas class="" id="cawanganChart"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+                <!-- Optionally, you can add labels or legends here -->
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+    <div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-4 ">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Jantina</h6>
+
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="jantinaChart"></canvas>
+        </div>
+        <div class="mt-4 text-center small">
+            <!-- Optionally, you can add labels or legends here -->
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-4">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Bangsa</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <div class="chart-area">
+                <canvas class="" id="bangsaChart"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+                <!-- Optionally, you can add labels or legends here -->
+            </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Pie Chart -->
+     <div class="col-xl-4">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Status Ahli</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <div class="chart-area">
+                <canvas class="" id="statusChart"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+                <!-- Optionally, you can add labels or legends here -->
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var ctx = document.getElementById('myBarChart').getContext('2d');
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labelsY|safe }},
+                datasets: [{
+                    label: 'Total Fees Collected',
+                    data: {{ dataY|safe }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Monthly Fee Collection'
+                    }
+                }
+            }
+        });
+    
+        const fakultiLabels = {{ fakulti_labels|safe }};
+        const fakultiValues = {{ fakulti_values|safe }};
+        const cawanganLabels = {{ cawangan_labels|safe }};
+        const cawanganValues = {{ cawangan_values|safe }};
+        const jantinaLabels = {{ jantina_labels|safe }};
+        const jantinaValues = {{ jantina_values|safe }};
+        const bangsaLabels = {{ bangsa_labels|safe }};
+        const bangsaValues = {{ bangsa_values|safe }};
+        const statusLabels = {{ status_labels|safe }};
+        const statusValues = {{ status_values|safe }};
+
+        const createBarChart = (ctx, labels, data, title) => {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+
+    const createPieChart = (ctx, labels, data, title) => {
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: title,
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    };
+
+    createBarChart(document.getElementById('fakultiChart'), fakultiLabels, fakultiValues, 'Fakulti Distribution');
+    createBarChart(document.getElementById('cawanganChart'), cawanganLabels, cawanganValues, 'Cawangan Distribution');
+    createPieChart(document.getElementById('jantinaChart'), jantinaLabels, jantinaValues, 'Jantina Distribution');
+    createPieChart(document.getElementById('bangsaChart'), bangsaLabels, bangsaValues, 'Bangsa Distribution');
+    createPieChart(document.getElementById('statusChart'), statusLabels, statusValues, 'Status Distribution');
+
+</script>
+
+
+</div>
+<!-- /.container-fluid -->
+
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends "member/main.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+    
+
+    <div class="col">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">Text to Excel</h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <p>Convert .txt file to excel before import</p>
+                <a class="btn btn-info" href="{% url 'upload_file' %}">Convert</a>
+            </div>
+        </div>
+    
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">Import Member Fees</h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                
+                {% if messages %}
+                    <div class="alert alert-info">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="myfile">Select file to import:</label> <br>
+                        <input type="file" name="myfile" id="myfile" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    
+    
+
+
+    
+</div>
+
+{% endblock content %}

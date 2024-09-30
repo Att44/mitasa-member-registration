@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Charts</h1>
+
+    <h2>Fakulti Distribution</h2>
+    <canvas id="fakultiChart"></canvas>
+
+    <h2>Cawangan Distribution</h2>
+    <canvas id="cawanganChart"></canvas>
+
+    <h2>Jantina Distribution</h2>
+    <canvas id="jantinaChart"></canvas>
+
+    <h2>Bangsa Distribution</h2>
+    <canvas id="bangsaChart"></canvas>
+
+    <h2>Status Distribution</h2>
+    <canvas id="statusChart"></canvas>
+
+    <script>
+        const fakultiLabels = {{ fakulti_labels|safe }};
+        const fakultiValues = {{ fakulti_values|safe }};
+        const cawanganLabels = {{ cawangan_labels|safe }};
+        const cawanganValues = {{ cawangan_values|safe }};
+        const jantinaLabels = {{ jantina_labels|safe }};
+        const jantinaValues = {{ jantina_values|safe }};
+        const bangsaLabels = {{ bangsa_labels|safe }};
+        const bangsaValues = {{ bangsa_values|safe }};
+        const statusLabels = {{ status_labels|safe }};
+        const statusValues = {{ status_values|safe }};
+
+        const createBarChart = (ctx, labels, data, title) => {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+
+        const createPieChart = (ctx, labels, data, title) => {
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+        };
+
+        createBarChart(document.getElementById('fakultiChart'), fakultiLabels, fakultiValues, 'Fakulti Distribution');
+        createBarChart(document.getElementById('cawanganChart'), cawanganLabels, cawanganValues, 'Cawangan Distribution');
+        createPieChart(document.getElementById('jantinaChart'), jantinaLabels, jantinaValues, 'Jantina Distribution');
+        createPieChart(document.getElementById('bangsaChart'), bangsaLabels, bangsaValues, 'Bangsa Distribution');
+        createPieChart(document.getElementById('statusChart'), statusLabels, statusValues, 'Status Distribution');
+    </script>
+</body>
+</html>

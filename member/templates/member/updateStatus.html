@@ -1,0 +1,55 @@
+{% extends "member/main.html" %} 
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading 
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">User Information</h1>
+        {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
+    </div> -->
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow card-center mb-4">
+          <div class="card-body ">
+            <h2 class="mb-4">Member Status</h2>
+            <div class="form-group col-md-12">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <label>Status </label>
+                    {% render_field form.status class+="form-control" %}
+                    <input type="submit" class="btn btn-primary btn-block" >
+
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock content %}
+
+{% comment %} <div class="row">
+  <div class="col-6">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <h2 class="mb-4">Member Status</h2>
+        <div class="form-group col-md-12">
+          <label for="idCardNumber">Status </label>
+          <input type="text" value="{{member.status}}" class="form-control" readonly>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}

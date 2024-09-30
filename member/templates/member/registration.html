@@ -1,0 +1,176 @@
+
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00C781;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        .form-container h1 {
+            text-align: center;
+            color: #004d40;
+        }
+        .form-container p {
+            text-align: center;
+            color: #004d40;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group input[type="radio"] {
+            width: auto;
+        }
+        .form-group .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+        .form-group .radio-group label {
+            font-weight: normal;
+        }
+        .form-group .file-input {
+            border: 1px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .form-group .file-input input {
+            display: none;
+        }
+        .form-group .file-input:hover {
+            background-color: #f9f9f9;
+        }
+        .form-group .file-input::before {
+            content: 'Choose File';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-group .file-input::after {
+            content: 'No file chosen';
+            display: block;
+            color: #999;
+        }
+        .form-group input[type="file"]:valid + .file-input::after {
+            content: attr(data-file-name);
+        }
+        .form-group .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #00C781;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group .submit-btn:hover {
+            background-color: #009e60;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Client Details</h1>
+        <p>Enter the details of all incoming clients.</p>
+        <form>
+            <div class="form-group">
+                <label for="client-name">Client Name *</label>
+                <input type="text" id="client-name" name="client-name" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company *</label>
+                <input type="text" id="company" name="company" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="department">Department *</label>
+                <select id="department" name="department" required>
+                    <option value="">-Select-</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Preferred contact method *</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="contact-method" value="email" required> Email</label>
+                    <label><input type="radio" name="contact-method" value="phone" required> Phone</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Company address *</label>
+                <input type="text" id="address" name="address" placeholder="Street Address" required>
+                <input type="text" id="address2" name="address2" placeholder="Address Line 2">
+                <input type="text" id="city" name="city" placeholder="City">
+                <input type="text" id="state" name="state" placeholder="State/Region/Province">
+                <input type="text" id="postal-code" name="postal-code" placeholder="Postal / Zip Code">
+                <select id="country" name="country" required>
+                    <option value="">-Select-</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="website">Company website *</label>
+                <input type="url" id="website" name="website" required>
+            </div>
+            <div class="form-group">
+                <label for="logo">Company logo</label>
+                <input type="file" id="logo" name="logo" accept="image/*" required>
+                <div class="file-input" data-file-name="No file chosen"></div>
+            </div>
+            <div class="form-group">
+                <label for="working-hours">Working Hours *</label>
+                <input type="text" id="working-hours" name="working-hours" required>
+            </div>
+            <div class="form-group">
+                <label for="working-days">Working Days *</label>
+                <input type="text" id="working-days" name="working-days" required>
+            </div>
+            <div class="form-group">
+                <label for="billing-cycle">Billing Cycle *</label>
+                <input type="date" id="billing-cycle" name="billing-cycle" required>
+            </div>
+            <div class="form-group">
+                <label for="additional-info">Additional Information</label>
+                <textarea id="additional-info" name="additional-info" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+        

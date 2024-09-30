@@ -1,0 +1,65 @@
+{% extends "member/main.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Member Fee Details</h1>
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <p><strong>Nama:</strong> {{ member.nama }}</p>
+                    <p><strong>No Pekerja:</strong> {{ member.noPekerja }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+     <!-- DataTales Example -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+        
+                        <table class="table table-bordered table-striped" id="example" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Fee ID</th>
+                                    <th>Kod</th>
+                                    <th>Jabatan</th>
+                                    <th>Keterangan</th>
+                                    <th>Amount</th>
+                                    <th>Tarikh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fee in member_fees %}
+                                <tr>
+                                    <td>{{ fee.id }}</td>
+                                    <td>{{ fee.kod }}</td>
+                                    <td>{{ fee.jbtn }}</td>
+                                    <td>{{ fee.keterangan }}</td>
+                                    <td>{{ fee.amount }}</td>
+                                    <td>{{ fee.date }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+
+
+
+
+{% endblock content %}

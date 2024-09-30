@@ -1,0 +1,140 @@
+{% extends "member/main.html" %} 
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+  /* Hide the dropdown arrow for select elements */
+  select[readonly] {
+    pointer-events: none;
+    touch-action: none;
+    background: #e9ecef; /* Optional: to match the readonly input background */
+  }
+</style>
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading 
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">User Information</h1>
+        {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
+    </div> -->
+    
+    <div class="row">
+    
+        <!-- Pie Chart -->
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                {% comment %} <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">User Information</h6>
+
+                </div> {% endcomment %}
+                <!-- Card Body -->
+                <div class="card-body">
+                        <div class=" ">
+                                        <h2 class="mb-4">Kemaskini Maklumat Ahli</h2>
+                                        <form action="" method="POST">
+                                          {% csrf_token %}
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="fullName">Nama Penuh</label>
+                                              {% render_field form.nama|append_attr:"readonly:readonly" class+="form-control" placeholder="Nama Penuh" %}
+                                    
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="gender">Jantina</label>
+                                              {% render_field form.jantina class+="form-control" placeholder="Jantina" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="employeeNumber">Staff ID</label>
+                                              {% render_field form.user|append_attr:"readonly:readonly" class+="form-control"  %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="idCardNumber">No Kad Pengenalan</label>
+                                              {% render_field form.noIC|append_attr:"readonly:readonly" class+="form-control" placeholder="No Kad Pengenalan" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="telephoneNumber">No Telefon</label>
+                                              {% render_field form.noTel class+="form-control" placeholder="No Telefon" %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="faculty">Fakulti</label>
+                                              {% render_field form.fakulti class+="form-control" placeholder="Fakulti" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="currentDepartment">Jabatan Sekarang / PTJ (Jika ada)</label>
+                                              {% render_field form.jbtnPTJ class+="form-control" placeholder="Jabatan Sekarang / PTJ (Jika ada)" %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="branch">Cawangan</label>
+                                              {% render_field form.cawangan class+="form-control" placeholder="Cawangan Terkini" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="emailAddress">Alamat Email</label>
+                                              {% render_field form.email class+="form-control" placeholder="Alamat Email" %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="altEmailAddress">Alamat Email Alternatif</label>
+                                              {% render_field form.emailAlt class+="form-control" placeholder="Alamat Email Alternatif" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="permanentAddress">Alamat Rumah Tetap</label>
+                                              {% render_field form.alamat class+="form-control" placeholder="Alamat Rumah Tetap Terkini" %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="dateOfPension">Tarikh Pencen</label>
+                                              {% render_field form.tarikhPencen class+="form-control" type="date" placeholder="Tarikh Pencen" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="spouseGuardianName">Nama Pasangan / Waris</label>
+                                              {% render_field form.namaPW class+="form-control" placeholder="Nama Pasangan / Waris" %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="spouseGuardianPhone">No Telefon Pasangan / Waris</label>
+                                              {% render_field form.noTelPW class+="form-control" placeholder="No Telefon Pasangan / Waris" %}
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="idCardNumber">Bangsa </label>
+                                              {% render_field form.bangsa class+="form-control" placeholder="Bangsa" %}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="idCardNumber">Tarikh Lahir </label>
+                                              {% render_field form.tarikhLahir class+="form-control" type="date" %}
+                                            </div>
+
+                                          </div>
+                                          <div class="text-center mt-4">
+                                            <a class='btn btn-warning col-md-3 mr-5 mb-3' href="{% url 'dashboard' %}"> &#8592; Back to Profile</a>
+                                            <button type="submit" class="btn btn-primary col-md-3 mb-3">Submit</button>
+
+                                          </div>
+                                        </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "member/main.html" %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Fee Count</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Member Fee Count</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Member Name</th>
+                    <th>Staff ID</th>
+                    <th>Fee Count</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                <tr>
+                    <td>{{ member.nama }}</td>
+                    <td>{{ member.noPekerja }}</td>
+                    <td>{{ member.fee_count }}</td>
+                    <td><a href="{% url 'member_fee_detail' member.id %}" class="btn btn-primary">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

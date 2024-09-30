@@ -1,0 +1,30 @@
+{% extends "member/main.html" %}
+{% block content %}
+{% load static %}
+<div class="container-fluid"> 
+
+    <div class="col">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">Text to Excel
+        </h1>
+        <div class="card shadow mb-4">
+            <div class="card-body">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <a class='btn btn-warning' href="{% url 'import-fees' %}"> &#8592; Back to Import</a>
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+
+{% endblock content %}

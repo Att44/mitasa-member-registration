@@ -1,0 +1,103 @@
+{% extends "member/main.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<br>
+<div class="row">
+    <div class='col-md-3'>
+        <div class='card card-body'>
+            <a class='btn btn-warning' href="{% url 'dashboard' %}"> &#8592; Back to Profile</a>
+            <hr>
+            <h3 style="text-align: center"> Account Setting</h3>
+            <hr>
+
+        </div>
+    </div>
+    <div class='col-md-9'>
+        <div class='card card-body'>
+            <div class="container mt-5">
+                <h2 class="mb-4">Member Information</h2>
+                <form action="" method="POST">
+                  {% csrf_token %}
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="fullName">Full Name</label>
+                      {% render_field form.nama class+="form-control" placeholder="Enter full name" %}
+            
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="gender">Gender</label>
+                      {% render_field form.jantina class+="form-control" placeholder="Gender" %}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="employeeNumber">Staff ID</label>
+                      {% render_field form.noPekerja class+="form-control" placeholder="Staff ID" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="idCardNumber">Identification Card Number</label>
+                      {% render_field form.noIC class+="form-control" placeholder="IC Number" %}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="telephoneNumber">Telephone Number</label>
+                      {% render_field form.noTel class+="form-control" placeholder="Telephone Number" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="faculty">Faculty</label>
+                      {% render_field form.fakulti class+="form-control" placeholder="Faculty" %}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="currentDepartment">Current Department</label>
+                      {% render_field form.jbtnPTJ class+="form-control" placeholder="Enter current departmentr" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="branch">Branch</label>
+                      {% render_field form.cawangan class+="form-control" placeholder="Enter current Branch" %}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="emailAddress">Email Address</label>
+                      {% render_field form.email class+="form-control" placeholder="Enter Email Address" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="altEmailAddress">Alternative Email Address</label>
+                      {% render_field form.emailAlt class+="form-control" placeholder="Enter Alternative Email Address" %}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="permanentAddress">Permanent Address</label>
+                      {% render_field form.alamat class+="form-control" placeholder="Enter Permanent Address" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="dateOfPension">Date of Pension</label>
+                      {% render_field form.tarikhPencen class+="form-control" placeholder="Enter Date of Pension" %}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="spouseGuardianName">Name of Spouse / Guardian</label>
+                      {% render_field form.namaPW class+="form-control" placeholder="Enter Name of Spouse / Guardian" %}
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="spouseGuardianPhone">Phone Number Spouse / Guardian</label>
+                      {% render_field form.noTelPW class+="form-control" placeholder="Enter Telephone Number of Spouse / Guardian" %}
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

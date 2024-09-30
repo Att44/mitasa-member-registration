@@ -1,0 +1,70 @@
+{% extends "member/main.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    {% comment %} <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p> {% endcomment %}
+
+    <!-- DataTales Example -->
+   <h1 class="h3 mb-4 text-gray-800">Terminated List</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="text-right">
+                <a class="btn btn-sm btn-success" href="{% url 'export_members' %}?status=Not a Member"><i class="fas fa-file-export fa-sm text-white-50"></i> Export</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="example" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Staff ID</th>
+                            <th>Faculty</th>
+                            <th>Status</th>
+                            <th class="text-center">View Details</th>
+                            <th class="text-center">View Payment</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Staff ID</th>
+                            <th>Faculty</th>
+                            <th>Status</th>
+                            <th class="text-center">View Details</th>
+                            <th class="text-center">View Payment</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% if listTerminate %}
+                        {% for member in listTerminate %}
+                        <tr>
+                            <td>{{member.nama}}</td>
+                            <td>{{member.noPekerja}}</td>
+                            <td>{{member.fakulti}}</td>
+                            <td>{{member.status}}</td>
+                            <td class="text-center"> <a class="btn btn-sm btn-info" href="{% url 'member' member.id %}">View</a> </td>
+                            <td class="text-center"> <a class="btn btn-sm btn-info" href="{% url 'member_fee_detail' member.id %}">View</a> </td>
+
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+
+{% endblock content %}

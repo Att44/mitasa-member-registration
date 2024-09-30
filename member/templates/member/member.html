@@ -1,0 +1,166 @@
+{% extends "member/main.html" %} 
+{% load static %}
+{% load widget_tweaks %}
+{% load custom_filters %}
+{% block content %}
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading 
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">User Information</h1>
+        {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
+    </div> -->
+
+    <div class="row">
+      <div class="col-xl col-md mb-4">
+        <div class="card border-left-{{ member.status|status_border_class }} shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-{{ member.status|status_text_class }} text-uppercase mb-1">
+                  Member Status
+                </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ member.status }}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+    
+        <!-- Pie Chart -->
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                {% comment %} <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">User Information</h6>
+
+                </div> {% endcomment %}
+                <!-- Card Body -->
+                <div class="card-body">
+                        <div class=" ">
+                                        <h2 class="mb-4">Maklumat Ahli</h2>
+                                        <form action="" method="POST">
+                                          {% csrf_token %}
+                                          <div class="form-row ">
+                                            <div class="form-group col-md-6">
+                                              <label for="fullName">Nama Penuh</label>
+                                              <input type="text" value="{{member.nama}}" class="form-control mr-5" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="gender">Jantina</label>
+                                              <input type="text" value="{{member.jantina}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="employeeNumber">Staff ID</label>
+                                              <input type="text" value="{{member.noPekerja}}" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="idCardNumber">No Kad Pengenalan</label>
+                                              <input type="text" value="{{member.noIC}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="telephoneNumber">No Telefon</label>
+                                              <input type="text" value="{{member.noTel}}" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="faculty">Fakulti</label>
+                                              <input type="text" value="{{member.fakulti}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="currentDepartment">Jabatan Sekarang / PTJ (Jika ada)</label>
+                                              <input type="text" value="{{member.jbtnPTJ}}" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="branch">Cawangan</label>
+                                              <input type="text" value="{{member.cawangan}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="emailAddress">Alamat Email</label>
+                                              <input type="text" value="{{member.email}}" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="altEmailAddress">Alamat Email Alternatif</label>
+                                              <input type="text" value="{{member.emailAlt}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="permanentAddress">Alamat Rumah Tetap</label>
+                                              <input type="text" value="{{member.alamat}}" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="dateOfPension">Tarikh Pencen</label>
+                                              <input type="text" value="{{member.tarikhPencen}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label for="spouseGuardianName">Nama Pasangan / Waris</label>
+                                              <input type="text" value="{{member.namaPW}}" class="form-control" readonly>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label for="spouseGuardianPhone">No Telefon Pasangan / Waris</label>
+                                              <input type="text" value="{{member.noTelPW}}" class="form-control" readonly>
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                            <label for="idCardNumber">Bangsa</label>
+                                            <input type="text" value="{{member.bangsa}}" class="form-control" readonly>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <label for="idCardNumber">Tarikh Lahir</label>
+                                            <input type="text" value="{{member.tarikhLahir}}" class="form-control" readonly>
+                                          </div>
+                                          
+                                        </div>
+                                          <div class="text-center mt-4">
+                                          <a type="text" href="{% url 'memberEdit' member.id %}"  class="btn btn-primary  col-md-3 mb-3">Update</a>
+                                        </form>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
+
+{% comment %} <div class="row">
+  <div class="col-6">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <h2 class="mb-4">Member Status</h2>
+        <div class="form-group col-md-12">
+          <label for="idCardNumber">Status </label>
+          <input type="text" value="{{member.status}}" class="form-control" readonly>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
